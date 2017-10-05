@@ -12,6 +12,7 @@ namespace Destiny2App.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.ManifestResp = ManifestResp.GetManifest();
             return View();
         }
 
