@@ -1,8 +1,8 @@
-﻿using RestSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Destiny2App.Models
 {
@@ -48,15 +48,10 @@ namespace Destiny2App.Models
             public object MessageData { get; set; }
         }
 
-        public static Root GetManifest()
+        public static object GetManifest()
         {
-            var request = new RestRequest();
-            request.Resource = "/Destiny2/Manifest/";
-            //request.RootElement = "Response";
-
-            APIRequest execute = new APIRequest();
-
-            return execute.Execute<Root>(request);
+            var request = new APIRequest();
+            return JsonConvert.DeserializeObject<Root>(request.Execute("Destiny2/Manifest/"));
         }
     }
 }
