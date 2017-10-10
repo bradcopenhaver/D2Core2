@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace Destiny2App.Models
 {
@@ -51,7 +52,20 @@ namespace Destiny2App.Models
         public static object GetManifest()
         {
             var request = new APIRequest();
-            return JsonConvert.DeserializeObject<Root>(request.Execute("Destiny2/Manifest/"));
+            StreamReader rdr = new StreamReader(request.Execute("/Destiny2/Manifest/"));
+            Root manifest = JsonConvert.DeserializeObject<Root>(rdr.ReadToEnd());
+
+            Task.Run(async () =>
+            {
+                // create a new file to write to
+                var file = File.Create(string.Format("Downloads/mobileWorldContentPaths{0}.zip", manifest.Response.version));
+                var contentStream = request.GetContent(manifest.Response.mobileWorldContentPaths.en); // get the actual content stream
+                await contentStream.CopyToAsync(file); // copy that stream to the file stream
+                await file.FlushAsync(); // flush back to disk before disposing
+                
+            }).Wait();
+
+            return manifest;
         }
     }
 }
