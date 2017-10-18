@@ -12,7 +12,8 @@ namespace Destiny2App.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.ManifestResp = ManifestResp.GetManifest();
+            //ViewBag.Manifest = ManifestResp.GetManifest();
+            ViewBag.Milestones = Milestones.GetMilestones();
             return View();
         }
 

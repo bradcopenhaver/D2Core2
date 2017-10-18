@@ -4,6 +4,9 @@
 # API keys
 EnvironmentVariables.cs
 
+# SQLite db files
+*.sqlite
+
 # User-specific files
 *.suo
 *.user
