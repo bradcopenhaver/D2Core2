@@ -70,4 +70,37 @@ namespace Destiny2App.Models
             return responseBody;
         }
     }
+
+    public class Variant
+    {
+        public long activityHash { get; set; }
+    }
+
+    public class Activity
+    {
+        public long activityHash { get; set; }
+        public List<object> modifierHashes { get; set; }
+        public List<Variant> variants { get; set; }
+    }
+
+    public class Challenge
+    {
+        public object objectiveHash { get; set; }
+        public long activityHash { get; set; }
+    }
+
+    public class AvailableQuest
+    {
+        public long questItemHash { get; set; }
+        public Activity activity { get; set; }
+        public List<Challenge> challenges { get; set; }
+    }
+
+    public class MilestoneResp
+    {
+        public long milestoneHash { get; set; }
+        public List<AvailableQuest> availableQuests { get; set; }
+        public DateTime startDate { get; set; }
+        public DateTime endDate { get; set; }
+    }
 }

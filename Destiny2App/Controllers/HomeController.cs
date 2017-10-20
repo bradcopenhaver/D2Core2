@@ -13,7 +13,7 @@ namespace Destiny2App.Controllers
         public IActionResult Index()
         {
             //ViewBag.Manifest = ManifestResp.GetManifest();
-            ViewBag.Milestones = Milestones.GetMilestones();
+            ViewBag.Milestones = Milestone.GetMilestones();
             return View();
         }
 
@@ -33,7 +33,7 @@ namespace Destiny2App.Controllers
 
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

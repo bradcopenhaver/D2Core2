@@ -3,4 +3,9 @@
 }
 
 <h3>This is only a test.</h3>
-<code>@ViewBag.Manifest.Response.version</code>
+
+@foreach (var milestone in ViewBag.Milestones)
+{
+    <code>@milestone</code>
+    <p>-----</p>
+}
